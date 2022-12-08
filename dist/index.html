@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script src="vue.js"></script>
+  <script>
+    //响应式的数据变化
+    //数据的取值 和 更改值我们要监控到
+    const vm = new Vue({
+      data(){ //代理数据
+        return {
+          name:'ez',
+          age: 21,
+          address:{
+            num:30,
+            content:"萧山"
+          },
+          hobby:['eat','drink',{a:10}]
+        }
+      }
+    });
+    vm.name = 'enze'; // 修改值触发 set  vm.xxx -> vm._data.xxx
+    console.log(vm); // 取值触发 get  vm.xxx -> vm._data.xxx
+
+    // 修改数组 很少用索引来修改数组，因为[999]写代码，但是内部做劫持会浪费性能
+    // 用户一般修改数组 都是通过方法来修改 push shift...
+    vm.hobby.push('1');
+    // vm.hobby[2].a = 100; // 改数组对象中的属性也要被劫持到
+  </script>
+</body>
+</html>
